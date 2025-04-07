@@ -1,0 +1,53 @@
+﻿@model IEnumerable<U23957281_Prac_4.Models.StudyGroup>
+
+@{
+    ViewBag.Title = "StudentGroup";
+}
+
+<h2>StudentGroup</h2>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.StudentNo) </th>
+        <th>@Html.DisplayNameFor(model => model.FirstName) </th>
+        <th>@Html.DisplayNameFor(model => model.LastName) </th>
+        <th>@Html.DisplayNameFor(model => model.EmailAddress) </th>
+        <th>@Html.DisplayNameFor(model => model.myLink) </th>
+        <th>Delete</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="student-row">
+            <td>@Html.DisplayFor(model => item.StudentNo) </td>
+            <td class="first-name">@Html.DisplayFor(model => item.FirstName) </td>
+            <td>@Html.DisplayFor(model => item.LastName) </td>
+            <td>@Html.DisplayFor(model => item.EmailAddress) </td>
+            <td><button type="button" class="btn btn-success btn-sm" onclick="window.location.href='@Url.Content(item.myLink)'">LINK</button></td>
+            <td>
+                <button type="button" class="btn btn-success btn-sm" onclick="delete_row(this)">DELETE</button>
+            </td>
+        </tr>
+    }
+</table>
+
+@section scripts {
+    <script type="text/javascript">
+        //function to delete specified row
+        function delete_row(e) {
+            e.parentElement.parentElement.remove();
+            //console.log("hi");
+        }
+
+        window.onload = function () {
+        // Change text color to red for first names starting with "A"
+        var rows = document.querySelectorAll('.student-row');
+        rows.forEach(function (row) {
+            var firstNameCell = row.querySelector('.first-name');
+            if (firstNameCell && firstNameCell.innerText.trim().startsWith("A")) {
+                row.style.color = 'red';
+            }
+        });
+    };
+    </script>
+    }
